@@ -1,0 +1,13 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+repositories {
+    mavenCentral()
+    mavenRepo urls: "http://akka.io/repository/"
+    mavenRepo urls: "http://guiceyfruit.googlecode.com/svn/repo/releases/"
+}
+
+dependencies {
+    runtime group: 'se.scalablesolutions.akka', name: 'akka-actor', version: '1.0'
+    runtime group: 'se.scalablesolutions.akka', name: 'akka-typed-actor', version: '1.0'
+}
