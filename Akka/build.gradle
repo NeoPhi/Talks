@@ -4,10 +4,12 @@ apply plugin: 'eclipse'
 repositories {
     mavenCentral()
     mavenRepo urls: "http://akka.io/repository/"
+    mavenRepo urls: "http://repository.jboss.org/nexus/content/groups/public/"
     mavenRepo urls: "http://guiceyfruit.googlecode.com/svn/repo/releases/"
 }
 
 dependencies {
     runtime group: 'se.scalablesolutions.akka', name: 'akka-actor', version: '1.0'
     runtime group: 'se.scalablesolutions.akka', name: 'akka-typed-actor', version: '1.0'
+    runtime group: 'se.scalablesolutions.akka', name: 'akka-remote', version: '1.0'
 }
