@@ -21,21 +21,14 @@
  */
 package com.neophi.sample.akka;
 
-import akka.actor.Actors;
 import akka.actor.UntypedActor;
 
 @SuppressWarnings("unchecked")
-public class RemoteServerUntypedActor extends UntypedActor
+public class Pong extends UntypedActor
 {
     @Override
     public void onReceive(final Object message) throws Exception
     {
-        log().logger().info("Received: {} From: {}", message, getContext().getSender());
-    }
-
-    public static void main(final String[] args)
-    {
-        Actors.remote().start("localhost", 2552).register("hello-service", Actors.actorOf(RemoteServerUntypedActor.class));
-        // Not shutting down
+        log().logger().info("Pong: {}", message);
     }
 }

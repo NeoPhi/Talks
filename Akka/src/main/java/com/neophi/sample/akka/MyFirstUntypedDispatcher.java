@@ -21,21 +21,36 @@
  */
 package com.neophi.sample.akka;
 
+import akka.actor.ActorRef;
 import akka.actor.Actors;
-import akka.actor.UntypedActor;
+import akka.routing.UntypedDispatcher;
 
 @SuppressWarnings("unchecked")
-public class RemoteServerUntypedActor extends UntypedActor
+public class MyFirstUntypedDispatcher extends UntypedDispatcher
 {
+    private ActorRef pingRef = Actors.actorOf(Ping.class).start();
+
+    private ActorRef pongRef = Actors.actorOf(Pong.class).start();
+
     @Override
-    public void onReceive(final Object message) throws Exception
+    public ActorRef route(final Object message)
     {
-        log().logger().info("Received: {} From: {}", message, getContext().getSender());
+        if ("ping".equals(message))
+        {
+            return pingRef;
+        }
+        if ("pong".equals(message))
+        {
+            return pongRef;
+        }
+        throw new IllegalArgumentException("I can't route" + message);
     }
 
     public static void main(final String[] args)
     {
-        Actors.remote().start("localhost", 2552).register("hello-service", Actors.actorOf(RemoteServerUntypedActor.class));
-        // Not shutting down
+        ActorRef dispatcherRef = Actors.actorOf(MyFirstUntypedDispatcher.class).start();
+        dispatcherRef.sendOneWay("ping");
+        dispatcherRef.sendOneWay("pong");
+        dispatcherRef.sendOneWay("rally-on");
     }
 }

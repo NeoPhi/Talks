@@ -21,21 +21,15 @@
  */
 package com.neophi.sample.akka;
 
-import akka.actor.Actors;
-import akka.actor.UntypedActor;
+import java.util.List;
 
-@SuppressWarnings("unchecked")
-public class RemoteServerUntypedActor extends UntypedActor
+import akka.dispatch.Future;
+
+public interface MyTypedInterface
 {
-    @Override
-    public void onReceive(final Object message) throws Exception
-    {
-        log().logger().info("Received: {} From: {}", message, getContext().getSender());
-    }
+    void echo(final String message);
 
-    public static void main(final String[] args)
-    {
-        Actors.remote().start("localhost", 2552).register("hello-service", Actors.actorOf(RemoteServerUntypedActor.class));
-        // Not shutting down
-    }
+    List<String> reverse(final List<String> data);
+
+    Future<MyTypedMessage> send(final MyTypedMessage myMessage);
 }

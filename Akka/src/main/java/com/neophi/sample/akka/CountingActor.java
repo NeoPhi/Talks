@@ -21,21 +21,45 @@
  */
 package com.neophi.sample.akka;
 
+import akka.actor.ActorRef;
 import akka.actor.Actors;
 import akka.actor.UntypedActor;
+import akka.stm.Atomic;
+import akka.stm.Ref;
 
 @SuppressWarnings("unchecked")
-public class RemoteServerUntypedActor extends UntypedActor
+public class CountingActor extends UntypedActor
 {
+    private final Ref<Integer> counter = new Ref<Integer>(0);
+
     @Override
     public void onReceive(final Object message) throws Exception
     {
-        log().logger().info("Received: {} From: {}", message, getContext().getSender());
+        int newCount = new Atomic<Integer>()
+        {
+            public Integer atomically()
+            {
+                int newCount = counter.get() + ((Integer) message).intValue();
+                counter.set(newCount);
+                return newCount;
+            }
+        }.execute();
+        log().logger().info("Count now: {}", newCount);
     }
 
-    public static void main(final String[] args)
+    public static void main(final String[] args) throws Exception
     {
-        Actors.remote().start("localhost", 2552).register("hello-service", Actors.actorOf(RemoteServerUntypedActor.class));
-        // Not shutting down
+        ActorRef actorRef = Actors.actorOf(CountingActor.class);
+        actorRef.start();
+        for (int i = 1; i <= 10; i++)
+        {
+            actorRef.sendOneWay(Integer.valueOf(i));
+            if ((i % 5) == 0)
+            {
+                actorRef.sendOneWay(String.valueOf(i));
+            }
+        }
+        System.out.println("Done adding messages");
+        // how to safely shutdown?
     }
 }
