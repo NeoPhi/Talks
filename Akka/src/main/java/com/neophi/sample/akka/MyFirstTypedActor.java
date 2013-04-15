@@ -31,7 +31,7 @@ import akka.dispatch.Future;
 @SuppressWarnings("unchecked")
 public class MyFirstTypedActor extends TypedActor implements MyTypedInterface
 {
-    public void echo(String message)
+    public void echo(final String message)
     {
         log().logger().debug(message);
     }
@@ -46,7 +46,7 @@ public class MyFirstTypedActor extends TypedActor implements MyTypedInterface
         return result;
     }
 
-    public Future<MyTypedMessage> send(MyTypedMessage myMessage)
+    public Future<MyTypedMessage> send(final MyTypedMessage myMessage)
     {
         return future(new MyTypedMessage(myMessage.getFrom(), myMessage.getTo()));
     }

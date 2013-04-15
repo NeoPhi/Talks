@@ -1,0 +1,14 @@
+{
+  "name": "debugging",
+  "version": "0.0.1",
+  "description": "Sample code for Node.js debugging talk",
+  "main": "index.js",
+  "dependencies": {
+    "debug": "0.7.1",
+    "memwatch": "0.2.2",
+    "tick": "0.0.3",
+    "xml2js": "~0.2.6"
+  },
+  "author": "Daniel Rinehart",
+  "license": "MIT"
+}

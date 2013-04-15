@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    runtime group: 'se.scalablesolutions.akka', name: 'akka-actor', version: '1.0'
-    runtime group: 'se.scalablesolutions.akka', name: 'akka-typed-actor', version: '1.0'
-    runtime group: 'se.scalablesolutions.akka', name: 'akka-remote', version: '1.0'
+    compile group: 'se.scalablesolutions.akka', name: 'akka-actor', version: '1.0'
+    compile group: 'se.scalablesolutions.akka', name: 'akka-typed-actor', version: '1.0'
+    compile group: 'se.scalablesolutions.akka', name: 'akka-remote', version: '1.0'
 }

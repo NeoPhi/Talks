@@ -59,7 +59,7 @@ public class FutureUntypedActor extends UntypedActor
         }
         catch (Exception exception)
         {
-            System.out.println(exception.getMessage());
+            System.out.println("Future await exception" + exception.getMessage());
         }
         if (future.isCompleted())
         {
