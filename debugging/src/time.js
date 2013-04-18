@@ -1,4 +1,5 @@
 /**
+  node src/time.js
   node --prof src/time.js
   ./node_modules/.bin/node-tick-processor | less
 **/

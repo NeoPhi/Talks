@@ -1,5 +1,7 @@
 /**
-  node src/console.log
+  node src/console.js
+  node src/console.js 2> /dev/null
+  node src/console.js 1> /dev/null
 **/
 var obj = {
   a: 12,

@@ -1,7 +1,13 @@
 /**
+  # in seprate window
+  node-inspector
+
   node --debug-brk src/server.js
   // uncommnet debugger;
   node --debug src/server.js
+
+  # in separate window
+  curl http://127.0.0.1:1337/
 **/
 var http = require('http');
 var count = 0;
